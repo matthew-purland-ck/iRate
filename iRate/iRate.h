@@ -35,15 +35,6 @@
 
 
 #import <Availability.h>
-#undef weak_delegate
-#if __has_feature(objc_arc_weak) && \
-(TARGET_OS_IPHONE || __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_8)
-#define weak_delegate weak
-#else
-#define weak_delegate unsafe_unretained
-#endif
-
-
 #import <TargetConditionals.h>
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
@@ -158,7 +149,7 @@ typedef NS_ENUM(NSUInteger, iRateErrorCode)
 @property (nonatomic, readonly) BOOL declinedAnyVersion;
 @property (nonatomic, assign) BOOL ratedThisVersion;
 @property (nonatomic, readonly) BOOL ratedAnyVersion;
-@property (nonatomic, weak_delegate) id<iRateDelegate> delegate;
+@property (nonatomic, weak) id<iRateDelegate> delegate;
 
 //manually control behaviour
 - (BOOL)shouldPromptForRating;
